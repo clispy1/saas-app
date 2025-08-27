@@ -24,7 +24,7 @@ import {
 import { subjects } from "@/constants";
 import { Textarea } from "./ui/textarea";
 import { redirect } from "next/navigation";
-import { createCompanion } from "@/lib/actions/companion.actons";
+import { createCompanion } from "@/lib/actions/companion.actions";
 
 const formSchema = z.object({
     name: z.string().min(1, "Companion is required."),
@@ -32,7 +32,7 @@ const formSchema = z.object({
     topic: z.string().min(1, "Topic is required."),
     voice: z.string().min(1, "Voice is required."),
     style: z.string().min(1, "Style is required."),
-    duration: z.number().min(1, "Duration is required."),
+    duration: z.string().min(1, "Duration is required."),
 });
 
 const CompanionForm = () => {
@@ -45,7 +45,7 @@ const CompanionForm = () => {
             topic: "",
             voice: "",
             style: "",
-            duration: 15,
+            duration: "15",
         },
     });
 
