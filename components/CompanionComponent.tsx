@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import soundwaves from "@/constants/soundwaves.json";
 import { redirect } from "next/navigation";
+import { addToSessionHistory } from "@/lib/actions/companion.actions";
 
 enum CallStatus {
     INACTIVE = "INACTIVE",
@@ -46,7 +47,11 @@ const CompanionComponent = ({
 
     useEffect(() => {
         const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
-        const onCallEnd = () => setCallStatus(CallStatus.FINISHED);
+        const onCallEnd = () => {
+            setCallStatus(CallStatus.FINISHED);
+
+            addToSessionHistory(companionId);
+        };
 
         const onMessage = (message: Message) => {
             if (
@@ -67,7 +72,7 @@ const CompanionComponent = ({
 
         const onError = (error: Error) => {
             console.log("Error: ", error);
-            redirect("/companions");
+            // redirect("/companions");
         };
 
         vapi.on("call-start", onCallStart);
