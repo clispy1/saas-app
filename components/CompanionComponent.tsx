@@ -113,7 +113,7 @@ const CompanionComponent = ({
             serverMessages: [],
         };
 
-        // @ts-expect-error
+        // @ts-expect-error NOT AN ERROR
         vapi.start(configureAssistant(voice, style), assistantOverrides);
     };
 
